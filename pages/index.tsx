@@ -1,31 +1,34 @@
 import type { NextPage, GetStaticProps } from "next";
-import { createClient } from "contentful";
 import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import { clientContentful } from "../clients/contentful";
+import { categories } from "../utils/categories";
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID as string,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string,
-  });
-
-  const entries = await client.getEntries({
-    content_type: "toolEntry",
-    "fields.category": "utils",
-  });
+  // TODO: use to get all categories when new category field will be used.
+  // const resp = await clientContentful.getContentType("toolEntry");
 
   return {
     props: {
-      tools: entries.items,
+      categories,
     },
   };
 };
 
-const Home: NextPage = ({ tools }: any) => {
-  console.log(tools);
+interface Props {
+  categories: string[];
+}
+
+const Home: NextPage<Props> = ({ categories }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Frontbook</h1>
+        {categories.map((category) => (
+          <Link key={category} href={`/category/${category}`}>
+            <a>{category}</a>
+          </Link>
+        ))}
       </main>
     </div>
   );
