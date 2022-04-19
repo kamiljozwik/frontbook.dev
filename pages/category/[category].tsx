@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 
 import { clientContentful } from "../../clients/contentful";
 import { categories } from "../../utils/categories";
-import { Props } from "../../models/categoryPage";
+import { Props, Tool } from "../../models/categoryPage";
+import { getGithubData } from "../../clients/github";
 
 export async function getStaticPaths() {
   const paths = categories.map((category) => ({ params: { category } }));
@@ -14,11 +15,13 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const entries = await clientContentful.getEntries({
+  const entries = await clientContentful.getEntries<Tool>({
     content_type: "toolEntry",
     "fields.category": params?.category,
     limit: 999,
   });
+
+  const additionalData = await Promise.all([getGithubData(entries.items)]);
 
   return {
     props: {
