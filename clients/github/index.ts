@@ -18,28 +18,38 @@ const getGithubData = async (items: Entry<Tool>[]) => {
     .map((item) => {
       if (!item.fields.github) return undefined;
 
-      const splitted = item.fields.github.split("/");
+      const splitted = item.fields.github.split("/").filter(Boolean);
       const length = splitted.length;
-      return { owner: splitted[length - 2], name: splitted[length - 1] };
+      return {
+        owner: splitted[length - 2],
+        name: splitted[length - 1],
+        id: item.sys.id,
+      };
     })
     .filter((item): item is GithubMetaData => !!item);
 
   const promises = githubMetaData.map((u) =>
-    makeGithubRequest(u.owner, u.name)
+    makeGithubRequest(u.owner, u.name, u.id)
   );
 
-  return Promise.all<GithubRepoData>(promises);
+  return Promise.all(promises);
 };
 
 /** Query Github with GraphQL */
-const makeGithubRequest = async (owner: string, name: string) => {
+const makeGithubRequest = async (
+  owner: string,
+  name: string,
+  toolId: string
+) => {
   try {
-    const response = await clientGithub.request(query(owner, name));
-    return response;
+    const response = await clientGithub.request<GithubRepoData>(
+      query(owner, name)
+    );
+    return { ...response, toolId };
   } catch (error) {
     console.log(`Cannot get data for Github repo: ${owner}/${name}`);
     return null;
   }
 };
 
-export { clientGithub, getGithubData };
+export { getGithubData };

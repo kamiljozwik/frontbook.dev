@@ -1,7 +1,7 @@
-import { Entry } from "contentful";
+import { FullToolData } from "../clients/mergeData";
 
 export interface Props {
-  tools: Entry<Tool>[];
+  tools: FullToolData[];
 }
 
 /** Type of the tool returned from Contentful */

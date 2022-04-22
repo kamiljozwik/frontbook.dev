@@ -1,18 +1,19 @@
-import type { NextPage, GetStaticProps } from "next";
+import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
 import { clientContentful } from "../../clients/contentful";
 import { categories } from "../../utils/categories";
 import { Props, Tool } from "../../models/categoryPage";
 import { getGithubData } from "../../clients/github";
+import { mergeData } from "../../clients/mergeData";
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = (context) => {
   const paths = categories.map((category) => ({ params: { category } }));
   return {
     paths,
     fallback: true,
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const entries = await clientContentful.getEntries<Tool>({
@@ -23,9 +24,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const additionalData = await Promise.all([getGithubData(entries.items)]);
 
+  const fullTools = mergeData(entries.items, additionalData);
+
   return {
     props: {
-      tools: entries.items,
+      tools: fullTools,
     },
   };
 };
@@ -40,13 +43,18 @@ const Home: NextPage<Props> = ({ tools }) => {
       <h5>{`${category} (${tools?.length})`}</h5>
       {tools?.map((tool) => (
         <p className="category-item" key={tool.sys.id}>
-          {tool.fields.name}
+          <div>{tool.fields.name}</div>
+          <div>{tool.fields.github}</div>
+          <div>{tool.github?.repository.description}</div>
         </p>
       ))}
       <style jsx>
         {`
           .category-item {
             color: darkblue;
+            padding: 5px 10px;
+            margin: 10px;
+            border: 1px solid darkblue;
           }
         `}
       </style>
