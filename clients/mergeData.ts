@@ -1,15 +1,15 @@
 import { Entry } from "contentful";
 
 import { Tool } from "../models/categoryPage";
-import { GithubRepoData } from "./github/models";
+import { GithubRepoDataWithId } from "./github/models";
 
 export interface FullToolData extends Entry<Tool> {
-  github: GithubRepoData | null;
+  github: GithubRepoDataWithId | null;
 }
 
 const mergeData = (
   items: Entry<Tool>[],
-  additionalData: [(GithubRepoData | null)[]]
+  additionalData: [(GithubRepoDataWithId | null)[]]
 ): FullToolData[] => {
   return items.map((tool) => ({
     ...tool,

@@ -7,15 +7,32 @@ export type GithubMetaData = {
 
 /** Data returned from Github GraphQL endpoint */
 export type GithubRepoData = {
-  toolId: string;
   repository: {
     name: string;
     description: string;
     diskUsage: number;
-    issues: Object[];
-    stargazers: Object[];
-    licenseInfo: Object[];
+    issues: {
+      totalCount: number;
+    };
+    stargazers: {
+      totalCount: number;
+    };
+    licenseInfo: {
+      spdxId: string;
+      url: string;
+    };
     pushedAt: string;
-    releases: Object[];
+    releases: {
+      nodes: {
+        name: string;
+        isPrerelease: boolean;
+        isDraft: string;
+        publishedAt: string;
+        tagName: string;
+        url: string;
+      }[];
+    };
   };
 };
+
+export type GithubRepoDataWithId = GithubRepoData & { toolId: string };
