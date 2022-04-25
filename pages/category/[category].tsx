@@ -1,11 +1,11 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
-import { clientContentful } from "../../clients/contentful";
 import { categories } from "../../utils/categories";
 import { Props, Tool } from "../../models/categoryPage";
-import { getGithubData } from "../../clients/github";
+import { getGithubData } from "../../clients/github/getData";
 import { mergeData } from "../../clients/mergeData";
+import { getContentfulData } from "../../clients/contentful/getData";
 
 export const getStaticPaths: GetStaticPaths = (context) => {
   const paths = categories.map((category) => ({ params: { category } }));
@@ -15,15 +15,18 @@ export const getStaticPaths: GetStaticPaths = (context) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const entries = await clientContentful.getEntries<Tool>({
-    content_type: "toolEntry",
-    "fields.category": params?.category,
-    limit: 999,
-  });
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const entries = await getContentfulData.entriesByCategory(params?.category);
+
+  if (!entries) {
+    return {
+      props: {
+        tools: [],
+      },
+    };
+  }
 
   const additionalData = await Promise.all([getGithubData(entries.items)]);
-
   const fullTools = mergeData(entries.items, additionalData);
 
   return {

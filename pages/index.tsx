@@ -1,13 +1,9 @@
 import type { NextPage, GetStaticProps } from "next";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-import { clientContentful } from "../clients/contentful";
 import { categories } from "../utils/categories";
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // TODO: use to get all categories when new category field will be used.
-  // const resp = await clientContentful.getContentType("toolEntry");
-
   return {
     props: {
       categories,
