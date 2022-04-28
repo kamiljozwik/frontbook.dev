@@ -4,7 +4,7 @@ import { Tool } from "../models/categoryPage";
 import { GithubRepoDataWithId } from "./github/models";
 
 export interface FullToolData extends Entry<Tool> {
-  github: GithubRepoDataWithId | null;
+  // github: GithubRepoDataWithId | null;
 }
 
 const mergeData = (

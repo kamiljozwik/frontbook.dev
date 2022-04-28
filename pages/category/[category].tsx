@@ -3,9 +3,7 @@ import { useRouter } from "next/router";
 
 import { categories } from "../../utils/categories";
 import { Props } from "../../models/categoryPage";
-import { getGithubData } from "../../clients/github/getData";
-import { mergeData } from "../../clients/mergeData";
-import { getContentfulData } from "../../clients/contentful/getData";
+import { getAllTools } from "../../clients/contentful/getAllTools";
 
 export const getStaticPaths: GetStaticPaths = (context) => {
   const paths = categories.map((category) => ({ params: { category } }));
@@ -16,22 +14,15 @@ export const getStaticPaths: GetStaticPaths = (context) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
-  const entries = await getContentfulData.entriesByCategory(params?.category);
+  const allTools = await getAllTools();
 
-  if (!entries) {
-    return {
-      props: {
-        tools: [],
-      },
-    };
-  }
-
-  const additionalData = await Promise.all([getGithubData(entries.items)]);
-  const fullTools = mergeData(entries.items, additionalData);
+  const categoryTools = allTools?.items?.filter(
+    (tool) => tool.fields.category === params?.category
+  );
 
   return {
     props: {
-      tools: fullTools,
+      tools: categoryTools ?? [],
     },
   };
 };
@@ -48,7 +39,7 @@ const Home: NextPage<Props> = ({ tools }) => {
         <p className="category-item" key={tool.sys.id}>
           <div>{tool.fields.name}</div>
           <div>{tool.fields.github}</div>
-          <div>{tool.github?.repository.description}</div>
+          {/* <div>{tool.github?.repository.description}</div> */}
         </p>
       ))}
       <style jsx>

@@ -1,6 +1,7 @@
 import type { NextPage, GetStaticProps } from "next";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+
 import { categories } from "../utils/categories";
 
 export const getStaticProps: GetStaticProps = async (context) => {
