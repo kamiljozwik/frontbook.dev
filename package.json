@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "ts-node clients/contentful/getAllTools.ts",
+    "prebuild": "ts-node scripts/prebuild.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

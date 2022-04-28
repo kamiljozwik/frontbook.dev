@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { categories } from "../../utils/categories";
 import { Props } from "../../models/categoryPage";
-import { getAllTools } from "../../clients/contentful/getAllTools";
+import { getTools } from "../../clients/contentful/getTools";
 
 export const getStaticPaths: GetStaticPaths = (context) => {
   const paths = categories.map((category) => ({ params: { category } }));
@@ -14,11 +14,7 @@ export const getStaticPaths: GetStaticPaths = (context) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
-  const allTools = await getAllTools();
-
-  const categoryTools = allTools?.items?.filter(
-    (tool) => tool.fields.category === params?.category
-  );
+  const categoryTools = await getTools(params?.category);
 
   return {
     props: {

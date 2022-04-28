@@ -20,12 +20,13 @@ const getContentfulData = {
       console.log(error);
     }
   },
-  allEntries: async () => {
+  allEntries: async (limit = 500, skip = 0) => {
     try {
       console.log("Fetching all tools from Contentful API...");
       return clientContentful.getEntries<Tool>({
         content_type: "toolEntry",
-        limit: 500,
+        limit,
+        skip,
       });
     } catch (error) {
       console.log(`💥 Cannot get entries data from Contentful`);
