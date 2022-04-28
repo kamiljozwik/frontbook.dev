@@ -2,7 +2,7 @@ import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
 import { categories } from "../../utils/categories";
-import { Props, Tool } from "../../models/categoryPage";
+import { Props } from "../../models/categoryPage";
 import { getGithubData } from "../../clients/github/getData";
 import { mergeData } from "../../clients/mergeData";
 import { getContentfulData } from "../../clients/contentful/getData";
