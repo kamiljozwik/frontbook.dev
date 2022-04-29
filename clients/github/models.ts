@@ -1,12 +1,10 @@
 export type GithubMetaData = {
   owner: string;
   name: string;
-  /** Tool's id from Contentful */
-  id: string;
 };
 
 /** Data returned from Github GraphQL endpoint */
-export type GithubRepoData = {
+export type GithubRepoDetails = {
   repository: {
     name: string;
     description: string;
@@ -34,5 +32,3 @@ export type GithubRepoData = {
     };
   };
 };
-
-export type GithubRepoDataWithId = GithubRepoData & { toolId: string };

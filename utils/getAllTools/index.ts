@@ -1,15 +1,15 @@
-import { Entry } from "contentful";
 import fs from "fs";
 import path from "path";
+import { ToolFullDetails } from "../../models/tools";
 
-import { Tool } from "../../models/categoryPage";
-import { getContentfulData } from "./getData";
+import { getToolsContentful } from "./getToolsContentful";
+import { getExtraData } from "./getExtraData";
 
 const TOOLS_CACHE_PATH = path.resolve(".tools");
 
 /** Get all tools from contentful API or from local cache file. */
 const getTools = async (category?: string | string[]) => {
-  let cachedData: Entry<Tool>[] = [];
+  let cachedData: ToolFullDetails[] = [];
 
   try {
     cachedData = JSON.parse(fs.readFileSync(TOOLS_CACHE_PATH, "utf8"));
@@ -18,18 +18,10 @@ const getTools = async (category?: string | string[]) => {
   }
 
   if (cachedData.length === 0) {
-    const limit = 500;
-    let skip = 0;
-    const fetchData = async () => {
-      const data = await getContentfulData.allEntries(limit, skip);
-      cachedData = [...cachedData, ...(data?.items ?? [])];
-      if (cachedData.length !== data?.total) {
-        skip = skip + limit;
-        await fetchData();
-      }
-    };
+    const contentfulData = await getToolsContentful();
+    const withGithub = await getExtraData(contentfulData);
 
-    await fetchData();
+    cachedData = withGithub;
 
     try {
       fs.writeFileSync(TOOLS_CACHE_PATH, JSON.stringify(cachedData), "utf8");
@@ -39,8 +31,6 @@ const getTools = async (category?: string | string[]) => {
       console.log(error);
     }
   }
-
-  console.log(`Fetched ${cachedData.length} tools from Contentful API`);
 
   return category
     ? cachedData?.filter((tool) => tool.fields.category === category)

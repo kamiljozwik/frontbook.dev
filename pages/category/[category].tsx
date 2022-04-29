@@ -2,8 +2,12 @@ import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 
 import { categories } from "../../utils/categories";
-import { Props } from "../../models/categoryPage";
-import { getTools } from "../../clients/contentful/getTools";
+import { getTools } from "../../utils/getAllTools";
+import { ToolFullDetails } from "../../models/tools";
+
+interface Props {
+  tools: ToolFullDetails[];
+}
 
 export const getStaticPaths: GetStaticPaths = (context) => {
   const paths = categories.map((category) => ({ params: { category } }));
@@ -35,7 +39,8 @@ const Home: NextPage<Props> = ({ tools }) => {
         <p className="category-item" key={tool.sys.id}>
           <div>{tool.fields.name}</div>
           <div>{tool.fields.github}</div>
-          {/* <div>{tool.github?.repository.description}</div> */}
+          <div>{tool.github?.repository.description}</div>
+          <div>NPM Downloads: {tool.npm?.package.downloads}</div>
         </p>
       ))}
       <style jsx>

@@ -1,10 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { GithubRepoDataWithId } from "./models";
+import { GithubRepoDetails } from "./models";
 
-export const getMockedGithubData = (
-  name: string,
-  toolId: string
-): GithubRepoDataWithId => {
+export const getMockedGithubData = (name: string): GithubRepoDetails => {
   const tag = faker.system.semver();
   const releaseType = faker.datatype.number({ min: 0, max: 2 });
   const nextTag = tag
@@ -12,7 +9,6 @@ export const getMockedGithubData = (
     .map((el, index) => (index === releaseType ? parseInt(el) + 1 : el))
     .join(".");
   return {
-    toolId,
     repository: {
       name: name,
       description: faker.lorem.sentence(),

@@ -1,7 +1,5 @@
 export type NpmMetaData = {
   packageName: string;
-  /** Tool's id from Contentful */
-  id: string;
 };
 
 export type PackageDownloadsResponse = {
@@ -11,10 +9,8 @@ export type PackageDownloadsResponse = {
   package: string;
 };
 
-export type NpmPackageData = {
-  npm: {
+export type NpmPackageDetails = {
+  package: {
     downloads: number;
   };
 };
-
-export type NpmPackageDataWithId = NpmPackageData & { toolId: string };

@@ -1,9 +1,3 @@
-import { FullToolData } from "../clients/mergeData";
-
-export interface Props {
-  tools: FullToolData[];
-}
-
 /** Type of the tool returned from Contentful */
 export type Tool = {
   name: string;
