@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ categories }) => {
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Frontbook</h1>
         {categories.map((category) => (
-          <Link key={category} href={`/category/${category}`}>
+          <Link key={category} href={`/tools/${category}`}>
             <a>{category}</a>
           </Link>
         ))}

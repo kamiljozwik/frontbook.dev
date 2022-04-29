@@ -1,4 +1,5 @@
 import { createClient } from "contentful";
+import { apiCache } from "../../utils/apiCache";
 import { Tool } from "./models";
 
 const client = createClient({
@@ -23,7 +24,7 @@ const clientContentful = {
   allTags: async () => {
     try {
       console.log("Fetching all tags from Contentful API...");
-      return client.getTags();
+      return apiCache({ fileName: ".tags", fn: client.getTags });
     } catch (error) {
       console.log(`💥 Cannot get tags from Contentful`);
       console.log(error);
