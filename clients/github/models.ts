@@ -21,14 +21,16 @@ export type GithubRepoDetails = {
     };
     pushedAt: string;
     releases: {
-      nodes: {
-        name: string;
-        isPrerelease: boolean;
-        isDraft: string;
-        publishedAt: string;
-        tagName: string;
-        url: string;
-      }[];
+      nodes: Release[];
     };
   };
+};
+
+type Release = {
+  name: string;
+  isPrerelease: boolean;
+  isDraft: string;
+  publishedAt: string;
+  tagName: string;
+  url: string;
 };
