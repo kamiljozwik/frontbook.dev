@@ -14,3 +14,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+a {
+  width: 300px;
+  text-align: center;
+  padding: 5px 10px;
+  margin: 10px;
+  border: 1px solid darkblue;
+  display: inline-block;
+}

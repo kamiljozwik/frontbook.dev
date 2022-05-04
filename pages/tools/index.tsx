@@ -1,8 +1,8 @@
 import type { NextPage, GetStaticProps } from "next";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import Link from "next/link";
 
-import { categories } from "../utils/categories";
+import { categories } from "../../utils/categories";
 
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
@@ -20,17 +20,12 @@ const Home: NextPage<Props> = ({ categories }) => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Frontbook</h1>
-        <div>
-          <Link href="/tools">
-            <a>Tools</a>
+        <h1 className={styles.title}>ALL TOOLS</h1>
+        {categories.map((category) => (
+          <Link key={category} href={`/tools/${category}`}>
+            <a>{category}</a>
           </Link>
-        </div>
-        <div>
-          <Link href="/releases">
-            <a>Releases</a>
-          </Link>
-        </div>
+        ))}
       </main>
     </div>
   );
