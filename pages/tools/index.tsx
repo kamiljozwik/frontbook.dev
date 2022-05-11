@@ -1,5 +1,7 @@
+import { Group } from "@mantine/core";
 import type { NextPage, GetStaticProps } from "next";
 import Link from "next/link";
+import { CategoryCard } from "../../components/CategoryCard";
 
 import { PageProps } from "../../models/page";
 import { categories } from "../../utils/categories";
@@ -17,12 +19,12 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 const Tools: NextPage<Props> = ({ categories }) => {
   return (
     <div>
-      <h1>ALL TOOLS</h1>
-      {categories.map((category) => (
-        <Link key={category} href={`/tools/${category}`}>
-          <a>{category}</a>
-        </Link>
-      ))}
+      <h2>All categories</h2>
+      <Group>
+        {categories.map((category) => (
+          <CategoryCard key={category} category={category} />
+        ))}
+      </Group>
     </div>
   );
 };

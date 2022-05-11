@@ -6,9 +6,14 @@ import {
   ActionIcon,
   useMantineTheme,
   useMantineColorScheme,
+  Group,
 } from "@mantine/core";
 import { Sun, MoonStars } from "tabler-icons-react";
 import Link from "next/link";
+import Image from "next/image";
+
+import LogoLight from "../../../public/img/Logo4Light.png";
+import LogoDark from "../../../public/img/Logo4Dark.png";
 
 interface Props {
   opened: boolean;
@@ -21,8 +26,8 @@ export const AppHeader = ({ opened, setOpened }: Props) => {
   const dark = colorScheme === "dark";
 
   return (
-    <Header height={70} p="md">
-      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+    <Header height={90} p="md">
+      <Group align="center" position="apart">
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
@@ -33,7 +38,9 @@ export const AppHeader = ({ opened, setOpened }: Props) => {
           />
         </MediaQuery>
         <Link href="/">
-          <a>Frontbook</a>
+          <a>
+            <Image src={dark ? LogoDark : LogoLight} alt="Logo" />
+          </a>
         </Link>
         <ActionIcon
           variant="outline"
@@ -43,7 +50,7 @@ export const AppHeader = ({ opened, setOpened }: Props) => {
         >
           {dark ? <Sun size={18} /> : <MoonStars size={18} />}
         </ActionIcon>
-      </div>
+      </Group>
     </Header>
   );
 };

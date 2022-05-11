@@ -15,18 +15,16 @@ export const Navigation = ({ opened }: Props) => {
       hidden={!opened}
       width={{ sm: 200, lg: 300 }}
     >
-      <Navbar.Section>Section 1</Navbar.Section>
-      <Navbar.Section mt="md" id={configs.TOOLS_LIST_ID}>
+      <Navbar.Section id={configs.TOOLS_LIST_ID}>
         <Link href="/tools">
-          <a>Tools</a>
+          <a>All categories</a>
         </Link>
       </Navbar.Section>
       <Navbar.Section grow mt="md">
         <Link href="/releases">
-          <a>Releases</a>
+          <a>Last Releases</a>
         </Link>
       </Navbar.Section>
-      <Navbar.Section>Section 3</Navbar.Section>
     </Navbar>
   );
 };

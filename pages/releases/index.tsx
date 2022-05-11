@@ -1,4 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
+import { ReleasesCards } from "../../components/ReleasesCards";
 
 import { PageProps } from "../../models/page";
 import { ToolFullDetails } from "../../models/tools";
@@ -44,14 +45,7 @@ const Releases: NextPage<Props> = ({ tools, releasesWindow }) => {
       <main>
         <h1>Releases</h1>
         <h5>{`Last ${releasesWindow} days`}</h5>
-        {tools.map((t) => (
-          <div key={t.fields.name}>
-            <div>{t.fields.name}</div>
-            <div>{t.github?.repository?.releases?.nodes[0]?.publishedAt}</div>
-            <div>{t.github?.repository?.releases?.nodes[1]?.publishedAt}</div>
-            <br />
-          </div>
-        ))}
+        <ReleasesCards tools={tools} />
       </main>
     </div>
   );

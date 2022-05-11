@@ -6,6 +6,7 @@ import { ToolFullDetails } from "../../../models/tools";
 import { clientContentful } from "../../../clients";
 import { PageProps } from "../../../models/page";
 import { categories } from "../../../utils/categories";
+import { ToolsCards } from "../../../components/ToolsCards";
 
 interface Props extends PageProps {
   tools: ToolFullDetails[];
@@ -46,26 +47,8 @@ const Tag: NextPage<Props> = ({ tools }) => {
 
   return (
     <div>
-      <h4>Subcategory page</h4>
       <h5>{`${tag} (${tools?.length})`}</h5>
-      {tools?.map((tool) => (
-        <p className="category-item" key={tool.sys.id}>
-          <div>{tool.fields.name}</div>
-          <div>{tool.fields.github}</div>
-          <div>{tool.github?.repository.description}</div>
-          <div>NPM Downloads: {tool.npm?.package.downloads}</div>
-        </p>
-      ))}
-      <style jsx>
-        {`
-          .category-item {
-            color: darkgreen;
-            padding: 5px 10px;
-            margin: 10px;
-            border: 1px solid darkblue;
-          }
-        `}
-      </style>
+      <ToolsCards tools={tools} />
     </div>
   );
 };

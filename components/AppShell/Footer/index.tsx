@@ -4,7 +4,7 @@ import React from "react";
 export const AppFooter = () => {
   return (
     <Footer height={60} p="md">
-      Application footer
+      All rights reserved.
     </Footer>
   );
 };

@@ -11,10 +11,6 @@ a {
   text-decoration: none;
 }
 
-a {
-  border: 1px solid purple;
-}
-
 * {
   box-sizing: border-box;
 }
