@@ -1,11 +1,18 @@
 import type { NextPage, GetStaticProps } from "next";
 
+import { PageProps } from "../../models/page";
 import { ToolFullDetails } from "../../models/tools";
+import { categories } from "../../utils/categories";
 import { getTools } from "../../utils/getAllTools";
+
+interface Props extends PageProps {
+  tools: ToolFullDetails[];
+  releasesWindow: number;
+}
 
 const RELEASES_WINDOW = 30;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const tools = await getTools({});
 
   /** Get releases for given time window */
@@ -24,16 +31,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
+      categories,
       releasesWindow: RELEASES_WINDOW,
       tools: lastReleases,
     },
   };
 };
-
-interface Props {
-  tools: ToolFullDetails[];
-  releasesWindow: string;
-}
 
 const Releases: NextPage<Props> = ({ tools, releasesWindow }) => {
   return (

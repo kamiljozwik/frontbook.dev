@@ -11,6 +11,7 @@ import {
 
 import { Shell } from "../components/AppShell";
 import { AppHead } from "../components/AppHead";
+import { ToolsNavPortal } from "../components/AppShell/Navbar/ToolsNavPortal";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const preferredColorScheme = useColorScheme();
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Shell>
           <Component {...pageProps} />
         </Shell>
+        <ToolsNavPortal categories={pageProps.categories} />
       </MantineProvider>
     </ColorSchemeProvider>
   );

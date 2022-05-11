@@ -4,8 +4,10 @@ import { useRouter } from "next/router";
 import { getTools } from "../../../utils/getAllTools";
 import { ToolFullDetails } from "../../../models/tools";
 import { clientContentful } from "../../../clients";
+import { PageProps } from "../../../models/page";
+import { categories } from "../../../utils/categories";
 
-interface Props {
+interface Props extends PageProps {
   tools: ToolFullDetails[];
 }
 
@@ -32,6 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   return {
     props: {
+      categories,
       tools: tagTools ?? [],
     },
   };

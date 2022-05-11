@@ -1,9 +1,12 @@
 import type { NextPage, GetStaticProps } from "next";
 import Link from "next/link";
 
+import { PageProps } from "../../models/page";
 import { categories } from "../../utils/categories";
 
-export const getStaticProps: GetStaticProps = async (context) => {
+interface Props extends PageProps {}
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
   return {
     props: {
       categories,
@@ -11,11 +14,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-interface Props {
-  categories: string[];
-}
-
-const Home: NextPage<Props> = ({ categories }) => {
+const Tools: NextPage<Props> = ({ categories }) => {
   return (
     <div>
       <h1>ALL TOOLS</h1>
@@ -28,4 +27,4 @@ const Home: NextPage<Props> = ({ categories }) => {
   );
 };
 
-export default Home;
+export default Tools;

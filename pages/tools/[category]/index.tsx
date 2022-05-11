@@ -7,8 +7,9 @@ import { categories } from "../../../utils/categories";
 import { getTools } from "../../../utils/getAllTools";
 import { ToolFullDetails } from "../../../models/tools";
 import { clientContentful } from "../../../clients";
+import { PageProps } from "../../../models/page";
 
-interface Props {
+interface Props extends PageProps {
   tools: ToolFullDetails[];
   tags: Tag[];
 }
@@ -36,13 +37,14 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   return {
     props: {
+      categories,
       tools: categoryTools,
       tags: categoryTags ?? [],
     },
   };
 };
 
-const Home: NextPage<Props> = ({ tools, tags }) => {
+const Category: NextPage<Props> = ({ tools, tags }) => {
   const router = useRouter();
   const { category } = router.query;
 
@@ -61,7 +63,7 @@ const Home: NextPage<Props> = ({ tools, tags }) => {
       <div>
         <div>TOOLS:</div>
         {tools?.map((tool) => (
-          <p className="category-item" key={tool.sys.id}>
+          <p key={tool.sys.id}>
             <div>{tool.fields.name}</div>
             <div>{tool.fields.github}</div>
             <div>{tool.github?.repository.description}</div>
@@ -69,18 +71,8 @@ const Home: NextPage<Props> = ({ tools, tags }) => {
           </p>
         ))}
       </div>
-      <style jsx>
-        {`
-          .category-item {
-            color: darkblue;
-            padding: 5px 10px;
-            margin: 10px;
-            border: 1px solid darkblue;
-          }
-        `}
-      </style>
     </div>
   );
 };
 
-export default Home;
+export default Category;
