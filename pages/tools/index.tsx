@@ -1,5 +1,4 @@
 import type { NextPage, GetStaticProps } from "next";
-import styles from "../../styles/Home.module.css";
 import Link from "next/link";
 
 import { categories } from "../../utils/categories";
@@ -18,15 +17,13 @@ interface Props {
 
 const Home: NextPage<Props> = ({ categories }) => {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>ALL TOOLS</h1>
-        {categories.map((category) => (
-          <Link key={category} href={`/tools/${category}`}>
-            <a>{category}</a>
-          </Link>
-        ))}
-      </main>
+    <div>
+      <h1>ALL TOOLS</h1>
+      {categories.map((category) => (
+        <Link key={category} href={`/tools/${category}`}>
+          <a>{category}</a>
+        </Link>
+      ))}
     </div>
   );
 };

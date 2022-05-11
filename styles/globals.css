@@ -11,15 +11,10 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+a {
+  border: 1px solid purple;
 }
 
-a {
-  width: 300px;
-  text-align: center;
-  padding: 5px 10px;
-  margin: 10px;
-  border: 1px solid darkblue;
-  display: inline-block;
+* {
+  box-sizing: border-box;
 }
