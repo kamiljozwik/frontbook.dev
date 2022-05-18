@@ -1,7 +1,7 @@
-import { Paper, Stack } from "@mantine/core";
-import React from "react";
+import { Stack } from "@mantine/core";
 
 import { ToolFullDetails } from "../../models/tools";
+import { ToolCard } from "./ToolCard";
 
 interface Props {
   tools: ToolFullDetails[];
@@ -20,12 +20,7 @@ export const ToolsCards = ({ tools }: Props) => {
       })}
     >
       {tools?.map((tool) => (
-        <Paper shadow="xs" p="md" key={tool.sys.id}>
-          <div>{tool.fields.name}</div>
-          <div>{tool.fields.github}</div>
-          <div>{tool.github?.repository.description}</div>
-          <div>NPM Downloads: {tool.npm?.package.downloads}</div>
-        </Paper>
+        <ToolCard key={tool.sys.id} tool={tool} />
       ))}
     </Stack>
   );

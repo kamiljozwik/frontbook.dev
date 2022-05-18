@@ -6,7 +6,10 @@ query {
     name
     description
     diskUsage
-    issues {
+    issues(states:OPEN) {
+      totalCount
+    }
+    pullRequests(states:OPEN) {
       totalCount
     }
     stargazers {
@@ -16,12 +19,20 @@ query {
       spdxId
       url
     }
+    openGraphImageUrl
+    owner {
+      avatarUrl
+    }
     pushedAt
-    releases(last: 2) {
+    isArchived
+    releases(last: 5) {
       nodes {
         name
+        tagName
+				shortDescriptionHTML
         isPrerelease
         isDraft
+        isLatest
         publishedAt
         tagName
         url
