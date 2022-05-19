@@ -25,7 +25,7 @@ query {
     }
     pushedAt
     isArchived
-    releases(last: 5) {
+    releases(first: 5, orderBy: {field: CREATED_AT, direction: DESC} ) {
       nodes {
         name
         tagName

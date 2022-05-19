@@ -36,7 +36,7 @@ export type Repository = {
   };
 };
 
-type Release = {
+export type Release = {
   name: string;
   isPrerelease: boolean;
   isDraft: boolean;

@@ -10,6 +10,7 @@ import {
 import { AlertTriangle } from "tabler-icons-react";
 
 import { ToolFullDetails } from "../../../models/tools";
+import { ReleaseBadge } from "../../common/ReleaseBadge";
 
 interface Props {
   tool: ToolFullDetails;
@@ -46,24 +47,7 @@ export const Releases = ({ tool }: Props) => {
               <Text component="span" color={theme.colors.gray[6]}>
                 {new Date(release.publishedAt).toISOString().split("T")[0]}
               </Text>
-              <Badge<"a">
-                component="a"
-                ml={10}
-                variant="outline"
-                href={release.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={(theme) => ({
-                  width: "80px",
-                  "&:hover": {
-                    backgroundColor: theme.colors.blue[6],
-                    cursor: "pointer",
-                    color: "white",
-                  },
-                })}
-              >
-                {release.tagName}
-              </Badge>
+              <ReleaseBadge ml={10} release={release} />
             </div>
           ))
         ) : (

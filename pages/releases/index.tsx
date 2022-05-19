@@ -11,7 +11,7 @@ interface Props extends PageProps {
   releasesWindow: number;
 }
 
-const RELEASES_WINDOW = 30; // days
+const RELEASES_WINDOW = 14; // days
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const tools = await getTools({});
