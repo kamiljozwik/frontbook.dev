@@ -47,7 +47,7 @@ const Tag: NextPage<Props> = ({ tools }) => {
 
   return (
     <div>
-      <h5>{`${tag} (${tools?.length})`}</h5>
+      <h3>{`${tag} (${tools?.length} tools)`}</h3>
       <ToolsCards tools={tools} />
     </div>
   );

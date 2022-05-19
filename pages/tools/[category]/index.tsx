@@ -52,7 +52,9 @@ const Category: NextPage<Props> = ({ tools, tags }) => {
 
   return (
     <div>
-      <h5>{`${category} (${tools?.length})`}</h5>
+      <h3>{`${category} (${
+        tools?.length > 0 ? `${tools?.length} tools` : "Select subcategory"
+      })`}</h3>
       <div>
         <TagsCards tags={tags} />
       </div>

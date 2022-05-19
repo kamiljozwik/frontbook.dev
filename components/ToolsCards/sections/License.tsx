@@ -1,4 +1,4 @@
-import { Badge, Tooltip } from "@mantine/core";
+import { Badge, MediaQuery, Tooltip } from "@mantine/core";
 
 import { Repository } from "../../../clients/github/models";
 
@@ -12,25 +12,27 @@ export const License = ({ repository }: Props) => {
 
   const licenseInfo = repository?.licenseInfo;
   return (
-    <div style={{ minWidth: "140px", textAlign: "center" }}>
-      {licenseInfo ? (
-        licenseInfo && licenseInfo.spdxId !== "NOASSERTION" ? (
-          <Tooltip label="License">
-            <Badge
-              size="lg"
-              radius="md"
-              variant="filled"
-              color={licenseInfo.spdxId === "MIT" ? "green" : "orange"}
-            >
-              {licenseInfo.spdxId}
-            </Badge>
-          </Tooltip>
+    <MediaQuery smallerThan="xl" styles={{ display: "none" }}>
+      <div style={{ minWidth: "140px", textAlign: "center" }}>
+        {licenseInfo ? (
+          licenseInfo && licenseInfo.spdxId !== "NOASSERTION" ? (
+            <Tooltip label="License">
+              <Badge
+                size="lg"
+                radius="md"
+                variant="filled"
+                color={licenseInfo.spdxId === "MIT" ? "green" : "orange"}
+              >
+                {licenseInfo.spdxId}
+              </Badge>
+            </Tooltip>
+          ) : (
+            <Badge color="gray">No data</Badge>
+          )
         ) : (
           <Badge color="gray">No data</Badge>
-        )
-      ) : (
-        <Badge color="gray">No data</Badge>
-      )}
-    </div>
+        )}
+      </div>
+    </MediaQuery>
   );
 };

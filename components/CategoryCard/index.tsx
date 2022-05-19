@@ -22,16 +22,11 @@ const CategoryCard = ({ category }: Props) => {
   return (
     <div style={{ width: 340, margin: "auto" }}>
       <Card shadow="sm" p="lg">
-        {/* <Card.Section>
-          <Image src="./image.png" height={160} alt="Norway" />
-        </Card.Section> */}
-
         <Group
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
           <Text weight={500}>{category}</Text>
-          <Badge variant="light">999 tools</Badge>
         </Group>
 
         <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
@@ -41,7 +36,7 @@ const CategoryCard = ({ category }: Props) => {
         <Link key={category} href={`/tools/${category}`} passHref>
           <Button
             component="a"
-            variant="light"
+            variant="filled"
             color="blue"
             fullWidth
             style={{ marginTop: 14 }}
