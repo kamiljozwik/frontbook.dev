@@ -1,9 +1,13 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { Tag } from "contentful";
-import Link from "next/link";
+import { Text } from "@mantine/core";
 
-import { categories } from "../../../utils/categories";
+import {
+  categories,
+  getCategoryDict,
+  Category as CategoryType,
+} from "../../../dictionaries/categories";
 import { getTools } from "../../../utils/getAllTools";
 import { ToolFullDetails } from "../../../models/tools";
 import { clientContentful } from "../../../clients";
@@ -50,11 +54,14 @@ const Category: NextPage<Props> = ({ tools, tags }) => {
   const router = useRouter();
   const { category } = router.query;
 
+  const { name } = getCategoryDict(category as CategoryType);
+
   return (
     <div>
-      <h3>{`${category} (${
+      <h3>{name}</h3>
+      <Text mb={"30px"}>{`${
         tools?.length > 0 ? `${tools?.length} tools` : "Select subcategory"
-      })`}</h3>
+      }`}</Text>
       <div>
         <TagsCards tags={tags} />
       </div>

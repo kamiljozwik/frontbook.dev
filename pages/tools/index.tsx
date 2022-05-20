@@ -1,10 +1,9 @@
 import { Group } from "@mantine/core";
 import type { NextPage, GetStaticProps } from "next";
-import Link from "next/link";
 import { CategoryCard } from "../../components/CategoryCard";
 
 import { PageProps } from "../../models/page";
-import { categories } from "../../utils/categories";
+import { categories } from "../../dictionaries/categories";
 
 interface Props extends PageProps {}
 

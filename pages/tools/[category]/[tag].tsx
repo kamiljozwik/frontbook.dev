@@ -5,7 +5,11 @@ import { getTools } from "../../../utils/getAllTools";
 import { ToolFullDetails } from "../../../models/tools";
 import { clientContentful } from "../../../clients";
 import { PageProps } from "../../../models/page";
-import { categories } from "../../../utils/categories";
+import {
+  categories,
+  Category,
+  getCategoryDict,
+} from "../../../dictionaries/categories";
 import { ToolsCards } from "../../../components/ToolsCards";
 
 interface Props extends PageProps {
@@ -43,11 +47,14 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 const Tag: NextPage<Props> = ({ tools }) => {
   const router = useRouter();
-  const { tag } = router.query;
+  const { category, tag } = router.query;
+
+  const { name } = getCategoryDict(category as Category);
 
   return (
     <div>
-      <h3>{`${tag} (${tools?.length} tools)`}</h3>
+      <h3>{name}</h3>
+      <h4>{`${tag} (${tools?.length} tools)`}</h4>
       <ToolsCards tools={tools} />
     </div>
   );

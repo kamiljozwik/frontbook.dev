@@ -1,8 +1,9 @@
 import type { NextPage, GetStaticProps } from "next";
 import Link from "next/link";
+import { Group, Paper } from "@mantine/core";
 
 import { PageProps } from "../models/page";
-import { categories } from "../utils/categories";
+import { categories } from "../dictionaries/categories";
 
 interface Props extends PageProps {}
 
@@ -18,16 +19,18 @@ const Home: NextPage<Props> = () => {
   return (
     <div>
       <h1>Welcome to Frontbook</h1>
-      <div>
-        <Link href="/tools">
-          <a>Tools</a>
-        </Link>
-      </div>
-      <div>
-        <Link href="/releases">
-          <a>Releases</a>
-        </Link>
-      </div>
+      <Group>
+        <Paper p="xl" shadow="xs">
+          <Link href="/tools">
+            <a>Tools</a>
+          </Link>
+        </Paper>
+        <Paper p="xl" shadow="xs">
+          <Link href="/releases">
+            <a>Releases</a>
+          </Link>
+        </Paper>
+      </Group>
     </div>
   );
 };

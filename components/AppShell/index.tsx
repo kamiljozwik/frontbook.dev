@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
+
 import { Navigation } from "./Navbar";
-import { AppFooter } from "./Footer";
 import { AppHeader } from "./Header";
 
 const Shell: FC<{ children: ReactNode }> = ({ children }) => {
@@ -21,9 +21,8 @@ const Shell: FC<{ children: ReactNode }> = ({ children }) => {
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       fixed
-      navbar={<Navigation opened={opened} />}
-      footer={<AppFooter />}
       header={<AppHeader opened={opened} setOpened={setOpened} />}
+      navbar={<Navigation opened={opened} />}
     >
       {children}
     </AppShell>

@@ -44,7 +44,7 @@ export const CardTitle = ({ tool }: Props) => {
         title={tool.fields.name}
         closeButtonLabel="Close tool details modal"
       >
-        Tool details
+        Tool details will be here any minute now 😉
       </Modal>
     </>
   );

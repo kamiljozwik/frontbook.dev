@@ -3,7 +3,7 @@ import { ReleasesCards } from "../../components/ReleasesCards";
 
 import { PageProps } from "../../models/page";
 import { ToolFullDetails } from "../../models/tools";
-import { categories } from "../../utils/categories";
+import { categories } from "../../dictionaries/categories";
 import { getTools } from "../../utils/getAllTools";
 
 interface Props extends PageProps {

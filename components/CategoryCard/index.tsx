@@ -1,16 +1,10 @@
-import {
-  Card,
-  Image,
-  Text,
-  Badge,
-  Button,
-  Group,
-  useMantineTheme,
-} from "@mantine/core";
+import { Card, Text, Button, Group, useMantineTheme } from "@mantine/core";
 import Link from "next/link";
 
+import { Category, getCategoryDict } from "../../dictionaries/categories";
+
 interface Props {
-  category: string;
+  category: Category;
 }
 
 const CategoryCard = ({ category }: Props) => {
@@ -19,6 +13,8 @@ const CategoryCard = ({ category }: Props) => {
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
+  const { name, desc } = getCategoryDict(category);
+
   return (
     <div style={{ width: 340, margin: "auto" }}>
       <Card shadow="sm" p="lg">
@@ -26,12 +22,11 @@ const CategoryCard = ({ category }: Props) => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text weight={500}>{category}</Text>
+          <Text weight={500}>{name}</Text>
         </Group>
 
         <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-          Energistically extend transparent strategic theme areas without
-          optimal expertise. Conveniently deliver alternative.
+          {desc}
         </Text>
         <Link key={category} href={`/tools/${category}`} passHref>
           <Button
