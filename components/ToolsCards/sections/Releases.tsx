@@ -10,6 +10,7 @@ import {
 import { AlertTriangle } from "tabler-icons-react";
 
 import { ToolFullDetails } from "../../../models/tools";
+import { getReferenceDate } from "../../../utils/getReferenceDate";
 import { ReleaseBadge } from "../../common/ReleaseBadge";
 
 interface Props {
@@ -17,9 +18,7 @@ interface Props {
 }
 
 const UNMAINTAINED_DATE = 30 * 12; // ~ one year
-
-const referenceDate = new Date();
-referenceDate.setDate(referenceDate.getDate() - UNMAINTAINED_DATE);
+const referenceDate = getReferenceDate(UNMAINTAINED_DATE);
 
 export const Releases = ({ tool }: Props) => {
   const theme = useMantineTheme();
@@ -42,7 +41,7 @@ export const Releases = ({ tool }: Props) => {
           )}
         </Group>
         {releases?.length != 0 ? (
-          releases?.reverse().map((release) => (
+          releases?.map((release) => (
             <div key={release.tagName}>
               <Text component="span" color={theme.colors.gray[6]}>
                 {new Date(release.publishedAt).toISOString().split("T")[0]}

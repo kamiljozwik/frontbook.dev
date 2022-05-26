@@ -2,6 +2,7 @@ import { Badge, BadgeVariant, Card, Group, Text, Title } from "@mantine/core";
 import { ArrowRight, Calendar } from "tabler-icons-react";
 
 import { ToolFullDetails } from "../../models/tools";
+import { getReleaseType } from "../../utils/getReleaseType";
 import { Count } from "../common/Count";
 import { ReleaseBadge } from "../common/ReleaseBadge";
 
@@ -20,6 +21,8 @@ export const ReleasesCards = ({ tools }: Props) => {
     <Group position="center">
       {tools.map((t) => {
         const releases = t.github?.repository?.releases?.nodes ?? [];
+        const [releaseType, isSemantic] = getReleaseType(releases);
+
         return (
           <Card key={t.fields.name} shadow="xs" p="lg" sx={{ width: "400px" }}>
             <Group spacing="xs">
@@ -57,6 +60,7 @@ export const ReleasesCards = ({ tools }: Props) => {
                   Draft
                 </Badge>
               )}
+              {<Badge>{releaseType}</Badge>}
             </Group>
           </Card>
         );

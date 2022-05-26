@@ -5,6 +5,7 @@ import { PageProps } from "../../models/page";
 import { ToolFullDetails } from "../../models/tools";
 import { categories } from "../../dictionaries/categories";
 import { getTools } from "../../utils/getAllTools";
+import { getReferenceDate } from "../../utils/getReferenceDate";
 
 interface Props extends PageProps {
   tools: ToolFullDetails[];
@@ -13,19 +14,22 @@ interface Props extends PageProps {
 
 const RELEASES_WINDOW = 14; // days
 
+const sortFn = (a: ToolFullDetails, b: ToolFullDetails) =>
+  new Date(b.github?.repository.releases.nodes[0].publishedAt ?? "").getTime() -
+  new Date(a.github?.repository.releases.nodes[0].publishedAt ?? "").getTime();
+
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const tools = await getTools({});
 
   /** Get releases for given time window */
-  const referenceDate = new Date();
-  referenceDate.setDate(referenceDate.getDate() - RELEASES_WINDOW);
+  const referenceDate = getReferenceDate(RELEASES_WINDOW);
 
   const lastReleases = tools.filter((t) => {
     const releases = t.github?.repository?.releases?.nodes ?? [];
     if (releases.length > 0) {
       return (
-        // Last item is the current release
-        new Date(releases[releases.length - 1].publishedAt) > referenceDate
+        // First item is the current release
+        new Date(releases[0].publishedAt) > referenceDate
       );
     }
   });
@@ -34,7 +38,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     props: {
       categories,
       releasesWindow: RELEASES_WINDOW,
-      tools: lastReleases,
+      tools: lastReleases.sort(sortFn),
     },
   };
 };
