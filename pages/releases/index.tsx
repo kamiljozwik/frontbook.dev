@@ -1,11 +1,12 @@
 import type { NextPage, GetStaticProps } from "next";
-import { ReleasesCards } from "../../components/ReleasesCards";
 
+import { ReleasesCards } from "../../components/ReleasesCards";
 import { PageProps } from "../../models/page";
 import { ToolFullDetails } from "../../models/tools";
 import { categories } from "../../dictionaries/categories";
 import { getTools } from "../../utils/getAllTools";
 import { getReferenceDate } from "../../utils/getReferenceDate";
+import { Text, Title } from "@mantine/core";
 
 interface Props extends PageProps {
   tools: ToolFullDetails[];
@@ -27,10 +28,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const lastReleases = tools.filter((t) => {
     const releases = t.github?.repository?.releases?.nodes ?? [];
     if (releases.length > 0) {
-      return (
-        // First item is the current release
-        new Date(releases[0].publishedAt) > referenceDate
-      );
+      return new Date(releases[0].publishedAt) > referenceDate;
     }
   });
 
@@ -46,11 +44,9 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 const Releases: NextPage<Props> = ({ tools, releasesWindow }) => {
   return (
     <div>
-      <main>
-        <h1>Releases</h1>
-        <h5>{`Last ${releasesWindow} days`}</h5>
-        <ReleasesCards tools={tools} />
-      </main>
+      <Title align="center">Releases</Title>
+      <Text align="center" mb={20}>{`Last ${releasesWindow} days`}</Text>
+      <ReleasesCards tools={tools} />
     </div>
   );
 };

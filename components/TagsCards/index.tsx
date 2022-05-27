@@ -9,16 +9,14 @@ interface Props {
 
 export const TagsCards = ({ tags }: Props) => {
   return (
-    <div>
-      <Group>
-        {tags?.map((t) => (
-          <Paper key={t.sys.id} shadow="xs" p="md">
-            <Link href={`/tools/${t.sys.id.replace("-", "/")}`}>
-              <a>{t.name}</a>
-            </Link>
-          </Paper>
-        ))}
-      </Group>
-    </div>
+    <Group>
+      {tags?.map((t) => (
+        <Paper key={t.sys.id} shadow="xs" p="md">
+          <Link href={`/tools/${t.sys.id.replace("-", "/")}`}>
+            <a>{t.name}</a>
+          </Link>
+        </Paper>
+      ))}
+    </Group>
   );
 };

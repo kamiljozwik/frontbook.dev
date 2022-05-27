@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from "next";
 import { useRouter } from "next/router";
 import { Tag } from "contentful";
-import { Text } from "@mantine/core";
+import { Text, Title } from "@mantine/core";
 
 import {
   categories,
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     props: {
       categories,
       tools: categoryTools,
-      tags: categoryTags ?? [],
+      tags: categoryTags,
     },
   };
 };
@@ -58,16 +58,12 @@ const Category: NextPage<Props> = ({ tools, tags }) => {
 
   return (
     <div>
-      <h3>{name}</h3>
-      <Text mb={"30px"}>{`${
+      <Title align="center">{name}</Title>
+      <Text mb={"30px"} align="center">{`${
         tools?.length > 0 ? `${tools?.length} tools` : "Select subcategory"
       }`}</Text>
-      <div>
-        <TagsCards tags={tags} />
-      </div>
-      <div>
-        <ToolsCards tools={tools} />
-      </div>
+      <TagsCards tags={tags} />
+      <ToolsCards tools={tools} />
     </div>
   );
 };

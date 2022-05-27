@@ -11,9 +11,11 @@ import {
   getCategoryDict,
 } from "../../../dictionaries/categories";
 import { ToolsCards } from "../../../components/ToolsCards";
+import { Title } from "@mantine/core";
 
 interface Props extends PageProps {
   tools: ToolFullDetails[];
+  tagName: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
@@ -33,28 +35,38 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+  const tags = await clientContentful.allTags();
+  const currTag = `${params?.category}-${params?.tag}`;
   const tagTools = await getTools({
-    tag: `${params?.category}-${params?.tag}`,
+    tag: currTag,
   });
+
+  const tagName =
+    tags?.items.find((tag) => tag.sys.id === currTag)?.name ?? "Subcategory";
 
   return {
     props: {
+      tagName,
       categories,
       tools: tagTools ?? [],
     },
   };
 };
 
-const Tag: NextPage<Props> = ({ tools }) => {
+const Tag: NextPage<Props> = ({ tools, tagName }) => {
   const router = useRouter();
-  const { category, tag } = router.query;
+  const { category } = router.query;
 
   const { name } = getCategoryDict(category as Category);
 
   return (
     <div>
-      <h3>{name}</h3>
-      <h4>{`${tag} (${tools?.length} tools)`}</h4>
+      <Title align="center">{name}</Title>
+      <Title
+        align="center"
+        order={2}
+        mb={20}
+      >{`${tagName} (${tools?.length} tools)`}</Title>
       <ToolsCards tools={tools} />
     </div>
   );

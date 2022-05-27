@@ -1,17 +1,31 @@
 import { ActionIcon } from "@mantine/core";
-import { BrandGithub, ExternalLink, Package } from "tabler-icons-react";
+import {
+  BrandGithub,
+  BrandTwitter,
+  ExternalLink,
+  IconProps,
+  Package,
+} from "tabler-icons-react";
 
 interface Props {
   // TODO: make icon prop general
-  icon: "github" | "npm" | "website";
+  icon: "github" | "npm" | "website" | "twitter";
   link?: string;
   ariaLabel?: string;
+  iconProps?: IconProps;
 }
 
-export const ExternalIconLink = ({ icon, link, ariaLabel }: Props) => {
-  const iconProps = {
+export const ExternalIconLink = ({
+  icon,
+  link,
+  ariaLabel,
+  iconProps,
+}: Props) => {
+  const props: IconProps = {
     width: 20,
+    ...iconProps,
   };
+
   return (
     <>
       {link && (
@@ -23,9 +37,10 @@ export const ExternalIconLink = ({ icon, link, ariaLabel }: Props) => {
           variant="hover"
           aria-label={ariaLabel}
         >
-          {icon === "github" && <BrandGithub {...iconProps} />}
-          {icon === "npm" && <Package {...iconProps} />}
-          {icon === "website" && <ExternalLink {...iconProps} />}
+          {icon === "github" && <BrandGithub {...props} />}
+          {icon === "twitter" && <BrandTwitter {...props} />}
+          {icon === "npm" && <Package {...props} />}
+          {icon === "website" && <ExternalLink {...props} />}
         </ActionIcon>
       )}
     </>

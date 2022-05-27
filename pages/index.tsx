@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticProps } from "next";
 import Link from "next/link";
-import { Group, Paper } from "@mantine/core";
+import { Group, Paper, Title } from "@mantine/core";
 
 import { PageProps } from "../models/page";
 import { categories } from "../dictionaries/categories";
@@ -18,8 +18,10 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 const Home: NextPage<Props> = () => {
   return (
     <div>
-      <h1>Welcome to Frontbook</h1>
-      <Group>
+      <Title order={1} align={"center"} mb={20}>
+        Welcome to Frontbook
+      </Title>
+      <Group position="center">
         <Paper p="xl" shadow="xs">
           <Link href="/tools">
             <a>Tools</a>

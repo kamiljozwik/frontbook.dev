@@ -1,19 +1,5 @@
-import React from "react";
-import {
-  Header,
-  MediaQuery,
-  Burger,
-  ActionIcon,
-  useMantineTheme,
-  useMantineColorScheme,
-  Group,
-} from "@mantine/core";
-import { Sun, MoonStars } from "tabler-icons-react";
-import Link from "next/link";
-import Image from "next/image";
-
-import LogoLight from "../../../public/img/Logo4Light.png";
-import LogoDark from "../../../public/img/Logo4Dark.png";
+import { Header, MediaQuery, Burger, Group } from "@mantine/core";
+import { ExternalIconLink } from "../../common/ExternalIconLink";
 
 interface Props {
   opened: boolean;
@@ -21,35 +7,31 @@ interface Props {
 }
 
 export const AppHeader = ({ opened, setOpened }: Props) => {
-  const theme = useMantineTheme();
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
-
   return (
-    <Header height={90} p="md">
+    <Header height={50} p="md">
       <Group align="center" position="apart">
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
             onClick={() => setOpened((o) => !o)}
             size="sm"
-            color={theme.colors.gray[6]}
+            color="gray"
             mr="xl"
           />
         </MediaQuery>
-        <Link href="/">
-          <a>
-            <Image src={dark ? LogoDark : LogoLight} alt="Logo" />
-          </a>
-        </Link>
-        <ActionIcon
-          variant="outline"
-          color={dark ? "yellow" : "blue"}
-          onClick={() => toggleColorScheme()}
-          title="Toggle color scheme"
-        >
-          {dark ? <Sun size={18} /> : <MoonStars size={18} />}
-        </ActionIcon>
+        <div />
+        <Group>
+          <ExternalIconLink
+            icon="twitter"
+            link="https://twitter.com/Frontbook_dev"
+            ariaLabel="Link to Twitter"
+          />
+          <ExternalIconLink
+            icon="github"
+            link="https://github.com/kamiljozwik/frontbook.dev"
+            ariaLabel="Link to GitHub"
+          />
+        </Group>
       </Group>
     </Header>
   );

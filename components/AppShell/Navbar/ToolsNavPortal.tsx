@@ -24,7 +24,6 @@ const ToolsList = ({ categories }: Props) => {
   }));
 
   const data = [
-    { label: "Home", icon: Home, link: "/" },
     {
       label: "Tools",
       icon: Tool,
@@ -47,6 +46,11 @@ const ToolsList = ({ categories }: Props) => {
   );
 };
 
+/**
+ * It may looks strange that I use Portal and not import categories directly to components,
+ * but it is like that in case I would like to use catgories fetched from API and not the
+ * hardcoded one.
+ */
 const ToolsNavPortal = ({ categories }: Props) => {
   return (
     <Portal target={`#${configs.TOOLS_LIST_ID}`}>

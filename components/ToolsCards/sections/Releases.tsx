@@ -43,7 +43,7 @@ export const Releases = ({ tool }: Props) => {
         {releases?.length != 0 ? (
           releases?.map((release) => (
             <div key={release.tagName}>
-              <Text component="span" color={theme.colors.gray[6]}>
+              <Text component="span" color="gray">
                 {new Date(release.publishedAt).toISOString().split("T")[0]}
               </Text>
               <ReleaseBadge ml={10} release={release} />
