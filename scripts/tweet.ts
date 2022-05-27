@@ -20,19 +20,21 @@ export const tweet = async (allTools: ToolFullDetails[]) => {
     const lastReleases = tool.github?.repository.releases.nodes ?? [];
     const downloads = tool.npm?.package.downloads;
 
+    const [releaseType] = getReleaseType(lastReleases);
+
     const referenceDate = getReferenceDate(RELEASE_PERIOD);
     const releasedWithin24h =
       new Date(lastReleases[0]?.publishedAt) > referenceDate;
     const isLatest = lastReleases[0]?.isLatest;
+    const isImportant = ["major", "minor"].includes(releaseType);
 
     if (
       releasedWithin24h &&
       isLatest &&
+      isImportant &&
       lastReleases.length >= 2 &&
       downloads
     ) {
-      const [releaseType] = getReleaseType(lastReleases);
-
       const release: TweetRelease = {
         ...lastReleases[0],
         repoName: tool.github?.repository.name ?? tool.fields.name,
@@ -49,12 +51,12 @@ export const tweet = async (allTools: ToolFullDetails[]) => {
   const data = releases.sort((a, b) => b.downloads - a.downloads).slice(0, 10);
 
   try {
-    // TODO: check here Vercel env var and run only on Vercel build
     // TODO: use Firebase SDK to send tweet
-    const tweetContent = await axios.post(
-      process.env.FB_ENV === "local"
-        ? (process.env.TWITTER_FN_LOCAL as string)
-        : (process.env.TWITTER_FN as string),
+    /** Create "prod" tweet only during Vercel's build  */
+    await axios.post(
+      process.env.VERCEL === "1"
+        ? (process.env.TWITTER_FN as string)
+        : (process.env.TWITTER_FN_LOCAL as string),
       data,
       {
         headers: {
@@ -63,7 +65,6 @@ export const tweet = async (allTools: ToolFullDetails[]) => {
       }
     );
     console.log("Tweet send successfully!");
-    console.log(tweetContent.data);
   } catch {
     console.log("💥 Tweet not send.");
   }

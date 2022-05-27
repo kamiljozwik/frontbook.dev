@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "ts-node scripts/prebuild.ts",
-    "prebuild:local": "cross-env FB_ENV=local ts-node scripts/prebuild.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

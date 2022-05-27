@@ -7,7 +7,7 @@ const generateData = async () => {
   const allTools = await getTools({});
   console.log(`Fetched ${allTools.length} tools from Contentful API`);
 
-  await tweet(allTools);
+  allTools.length > 0 && (await tweet(allTools));
 
   console.log("Prebuild finished!");
 };
