@@ -1,3 +1,5 @@
+import { TagCollection } from "contentful";
+
 export type Category =
   | "js"
   | "css"
@@ -57,6 +59,7 @@ const categoriesDict: CategoryDict[] = [
   },
 ];
 
+// TODO: Get it from "tags"
 export const categories = categoriesDict.map((c) => c.id);
 
 export const getCategoryDict = (c: Category) =>

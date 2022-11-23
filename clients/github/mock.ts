@@ -28,7 +28,7 @@ export const getMockedGithubData = (name: string): GithubRepoDetails => {
         totalCount: faker.datatype.number({ min: 0, max: 100000 }),
       },
       licenseInfo: {
-        spdxId: faker.random.arrayElement([
+        spdxId: faker.helpers.arrayElement([
           "MIT",
           "NOASSERTION",
           "Apache-2.0",

@@ -2,7 +2,7 @@ import { Badge, BadgeProps } from "@mantine/core";
 
 import { Release } from "../../clients/github/models";
 
-interface Props extends BadgeProps<"a"> {
+interface Props extends BadgeProps {
   release?: Release;
   width?: string;
   maxWidth?: string;

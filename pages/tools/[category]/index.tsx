@@ -21,6 +21,7 @@ interface Props extends PageProps {
 }
 
 export const getStaticPaths: GetStaticPaths = (context) => {
+  // TODO: Get it from "tags"
   const paths = categories.map((category) => ({ params: { category } }));
   return {
     paths,

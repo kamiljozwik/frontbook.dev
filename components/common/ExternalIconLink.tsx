@@ -34,7 +34,7 @@ export const ExternalIconLink = ({
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          variant="hover"
+          variant="default"
           aria-label={ariaLabel}
         >
           {icon === "github" && <BrandGithub {...props} />}
