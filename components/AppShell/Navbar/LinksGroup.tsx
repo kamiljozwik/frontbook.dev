@@ -94,10 +94,12 @@ export function LinksGroup({
   const { route } = router;
 
   const items = (hasLinks ? links : []).map((link) => (
-    <Link href={link.link} key={link.label}>
-      <a className={cx(classes.link, link.isActive && classes.active)}>
-        {link.label}
-      </a>
+    <Link
+      href={link.link}
+      key={link.label}
+      className={cx(classes.link, link.isActive && classes.active)}
+    >
+      {link.label}
     </Link>
   ));
 
@@ -113,9 +115,7 @@ export function LinksGroup({
               <Icon size={18} />
             </ThemeIcon>
             <Box ml="md">
-              <Link href={link ?? "/"}>
-                <a>{label}</a>
-              </Link>
+              <Link href={link ?? "/"}>{label}</Link>
             </Box>
           </Box>
           {hasLinks && (

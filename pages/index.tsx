@@ -23,14 +23,10 @@ const Home: NextPage<Props> = () => {
       </Title>
       <Group position="center">
         <Paper p="xl" shadow="xs">
-          <Link href="/tools">
-            <a>Tools</a>
-          </Link>
+          <Link href="/tools">Tools</Link>
         </Paper>
         <Paper p="xl" shadow="xs">
-          <Link href="/releases">
-            <a>Releases</a>
-          </Link>
+          <Link href="/releases">Releases</Link>
         </Paper>
       </Group>
     </div>

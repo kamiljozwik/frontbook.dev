@@ -33,9 +33,7 @@ export const AppLogo = () => {
     <div className={classes.header}>
       <Group position="apart">
         <Link href="/">
-          <a>
-            <Image src={dark ? LogoDark : LogoLight} alt="Logo" />
-          </a>
+          <Image src={dark ? LogoDark : LogoLight} alt="Logo" />
         </Link>
         <ActionIcon
           variant="outline"

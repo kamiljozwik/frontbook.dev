@@ -12,9 +12,7 @@ export const TagsCards = ({ tags }: Props) => {
     <Group>
       {tags?.map((t) => (
         <Paper key={t.sys.id} shadow="xs" p="md">
-          <Link href={`/tools/${t.sys.id.replace("-", "/")}`}>
-            <a>{t.name}</a>
-          </Link>
+          <Link href={`/tools/${t.sys.id.replace("-", "/")}`}>{t.name}</Link>
         </Paper>
       ))}
     </Group>

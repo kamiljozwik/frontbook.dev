@@ -28,9 +28,8 @@ const CategoryCard = ({ category }: Props) => {
         <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
           {desc}
         </Text>
-        <Link key={category} href={`/tools/${category}`} passHref>
+        <Link key={category} href={`/tools/${category}`}>
           <Button
-            component="a"
             variant="filled"
             color="blue"
             fullWidth
