@@ -13,8 +13,8 @@ interface Props {
 export const ToolsCards = ({ tools }: Props) => {
   return (
     <ToolCardsProvider initTools={tools}>
-      <Paper mb={30} p={10} withBorder>
-        <Flex justify={"space-between"}>
+      <Paper mb={30} p={20} withBorder>
+        <Flex justify={"space-between"} align="center">
           <Filters />
           <Sorting />
         </Flex>

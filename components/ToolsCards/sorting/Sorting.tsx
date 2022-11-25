@@ -27,13 +27,13 @@ export const Sorting = () => {
   }));
 
   return (
-    <Flex>
+    <>
       <Select
         label="Sort by:"
         value={sortingBy}
         data={options}
         onChange={onChange}
       />
-    </Flex>
+    </>
   );
 };

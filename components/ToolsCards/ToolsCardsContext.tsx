@@ -7,9 +7,25 @@ import {
 } from "react";
 
 import { ToolFullDetails } from "../../models/tools";
-import { sortingFns, SortingType } from "./sorting/helpers";
+import { SortingType } from "./sorting/helpers";
 
-const ToolsCardsContext = createContext<ToolFullDetails[]>([]);
+type ToolsCardsState = {
+  tools: ToolFullDetails[];
+  sorting: SortingType;
+  filters: {
+    github?: number;
+    npm?: number;
+  };
+};
+
+type Filters = keyof ToolsCardsState["filters"];
+
+const ToolsCardsContext = createContext<ToolsCardsState>({
+  tools: [],
+  filters: {},
+  sorting: "downloads",
+});
+
 const ToolsCardsDispatchContext = createContext<Dispatch<Actions>>(() => null);
 
 const useToolCards = () => {
@@ -27,17 +43,29 @@ type Actions =
     }
   | {
       type: "filter";
-      payload?: any;
+      payload: { field: Filters; value: number };
     };
 
-const reducer = (toolsList: ToolFullDetails[], action: Actions) => {
+const reducer = (state: ToolsCardsState, action: Actions) => {
   switch (action.type) {
     case "sorting":
-      return [...toolsList].sort(sortingFns[action.payload]);
+      return {
+        tools: state.tools,
+        sorting: action.payload,
+        filters: state.filters,
+      };
     case "filter":
-      return toolsList;
+      return {
+        tools: state.tools,
+        sorting: state.sorting,
+        filters: {
+          ...state.filters,
+          [action.payload.field]: action.payload.value,
+        },
+      };
+
     default:
-      return toolsList;
+      return state;
   }
 };
 
@@ -46,13 +74,14 @@ interface Props extends PropsWithChildren {
 }
 
 const ToolCardsProvider = ({ children, initTools }: Props) => {
-  const [tasks, dispatch] = useReducer(
-    reducer,
-    [...initTools].sort(sortingFns["downloads"])
-  );
+  const [state, dispatch] = useReducer(reducer, {
+    tools: initTools,
+    filters: {},
+    sorting: "downloads",
+  });
 
   return (
-    <ToolsCardsContext.Provider value={tasks}>
+    <ToolsCardsContext.Provider value={state}>
       <ToolsCardsDispatchContext.Provider value={dispatch}>
         {children}
       </ToolsCardsDispatchContext.Provider>
@@ -61,3 +90,5 @@ const ToolCardsProvider = ({ children, initTools }: Props) => {
 };
 
 export { useToolCards, useToolCardsDispatch, ToolCardsProvider };
+
+export type { Filters };
