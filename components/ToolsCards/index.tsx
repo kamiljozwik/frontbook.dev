@@ -1,7 +1,10 @@
-import { Stack } from "@mantine/core";
+import { Flex, Paper } from "@mantine/core";
 
 import { ToolFullDetails } from "../../models/tools";
-import { ToolCard } from "./ToolCard";
+import { Filters } from "./filters/Filters";
+import { Sorting } from "./sorting/Sorting";
+import { ToolCardsProvider } from "./ToolsCardsContext";
+import { ToolsList } from "./ToolsList";
 
 interface Props {
   tools: ToolFullDetails[];
@@ -9,19 +12,14 @@ interface Props {
 
 export const ToolsCards = ({ tools }: Props) => {
   return (
-    <Stack
-      justify="flex-start"
-      sx={(theme) => ({
-        backgroundColor:
-          theme.colorScheme === "dark"
-            ? theme.colors.dark[8]
-            : theme.colors.gray[0],
-        height: 300,
-      })}
-    >
-      {tools?.map((tool) => (
-        <ToolCard key={tool.sys.id} tool={tool} />
-      ))}
-    </Stack>
+    <ToolCardsProvider initTools={tools}>
+      <Paper mb={30} p={10} withBorder>
+        <Flex justify={"space-between"}>
+          <Filters />
+          <Sorting />
+        </Flex>
+      </Paper>
+      <ToolsList />
+    </ToolCardsProvider>
   );
 };

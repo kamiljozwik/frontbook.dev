@@ -9,9 +9,9 @@ import {
 } from "@mantine/core";
 import { AlertTriangle } from "tabler-icons-react";
 
-import { ToolFullDetails } from "../../../models/tools";
-import { getReferenceDate } from "../../../utils/getReferenceDate";
-import { ReleaseBadge } from "../../common/ReleaseBadge";
+import { ToolFullDetails } from "../../../../models/tools";
+import { getReferenceDate } from "../../../../utils/getReferenceDate";
+import { ReleaseBadge } from "../../../common/ReleaseBadge";
 
 interface Props {
   tool: ToolFullDetails;

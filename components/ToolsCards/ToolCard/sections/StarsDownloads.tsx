@@ -1,7 +1,7 @@
 import { Indicator } from "@mantine/core";
 
-import { ToolFullDetails } from "../../../models/tools";
-import { Count } from "../../common/Count";
+import { ToolFullDetails } from "../../../../models/tools";
+import { Count } from "../../../common/Count";
 
 interface Props {
   tool: ToolFullDetails;

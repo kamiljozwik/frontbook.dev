@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, createStyles, Group, Modal, Text, Title } from "@mantine/core";
 
-import { ToolFullDetails } from "../../../../models/tools";
+import { ToolFullDetails } from "../../../../../models/tools";
 import { Labels } from "./Labels";
 
 const useStyles = createStyles((theme) => ({

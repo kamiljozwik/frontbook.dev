@@ -1,12 +1,14 @@
 import { Group, Paper } from "@mantine/core";
 
-import { ToolFullDetails } from "../../models/tools";
-import { CardTitle } from "./sections/CardTitle";
-import { ExternalLinks } from "./sections/ExternalLinks";
-import { IssuesPrs } from "./sections/IssuesPrs";
-import { License } from "./sections/License";
-import { Releases } from "./sections/Releases";
-import { StarsDownloads } from "./sections/StarsDownloads";
+import { ToolFullDetails } from "../../../models/tools";
+import {
+  CardTitle,
+  ExternalLinks,
+  IssuesPrs,
+  License,
+  Releases,
+  StarsDownloads,
+} from "./sections";
 
 interface Props {
   tool: ToolFullDetails;

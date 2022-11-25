@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 
-import { ToolFullDetails } from "../../../models/tools";
-import { ExternalIconLink } from "../../common/ExternalIconLink";
+import { ToolFullDetails } from "../../../../models/tools";
+import { ExternalIconLink } from "../../../common/ExternalIconLink";
 
 interface Props {
   tool: ToolFullDetails;

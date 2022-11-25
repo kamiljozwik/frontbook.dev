@@ -1,6 +1,6 @@
 import { Badge, Group, Tooltip } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { ToolFullDetails } from "../../../../models/tools";
+import { ToolFullDetails } from "../../../../../models/tools";
 
 interface Prosp {
   tool: ToolFullDetails;

@@ -1,6 +1,6 @@
 import { Badge, MediaQuery, Tooltip } from "@mantine/core";
 
-import { Repository } from "../../../clients/github/models";
+import { Repository } from "../../../../clients/github/models";
 
 interface Props {
   repository?: Repository;
