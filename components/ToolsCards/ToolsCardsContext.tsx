@@ -75,7 +75,7 @@ interface Props extends PropsWithChildren {
 
 const ToolCardsProvider = ({ children, initTools }: Props) => {
   const [state, dispatch] = useReducer(reducer, {
-    tools: initTools,
+    tools: initTools ?? [],
     filters: {},
     sorting: "downloads",
   });

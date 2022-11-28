@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Shell>
           <Component {...pageProps} />
         </Shell>
+        {/* Make it better when migrating to Next.js 13 "app" folder */}
         <ToolsNavPortal categories={pageProps.categories} />
       </MantineProvider>
     </ColorSchemeProvider>

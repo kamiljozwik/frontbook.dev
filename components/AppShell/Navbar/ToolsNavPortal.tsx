@@ -1,6 +1,6 @@
 import { Portal } from "@mantine/core";
 import { useRouter } from "next/router";
-import { CalendarStats, Home, Tool } from "tabler-icons-react";
+import { CalendarStats, Tool } from "tabler-icons-react";
 
 import { Category, getCategoryDict } from "../../../dictionaries/categories";
 

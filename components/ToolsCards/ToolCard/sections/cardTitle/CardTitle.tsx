@@ -3,6 +3,7 @@ import { Button, createStyles, Group, Modal, Text, Title } from "@mantine/core";
 
 import { ToolFullDetails } from "../../../../../models/tools";
 import { Labels } from "./Labels";
+import { ModalContent } from "../../modal/ModalContent";
 
 const useStyles = createStyles((theme) => ({
   title: {
@@ -44,7 +45,7 @@ export const CardTitle = ({ tool }: Props) => {
         title={tool.fields.name}
         closeButtonLabel="Close tool details modal"
       >
-        Tool details will be here any minute now 😉
+        <ModalContent tool={tool} />
       </Modal>
     </>
   );
